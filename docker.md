@@ -69,5 +69,7 @@ I've found some issues with usernamespace and selinux in docker 1.12 (for the mo
 
 - reboot
 
+### Run a container witout usernamespace
 
+For some container could be necessary to disable user namespace (in case ho nfs mount or net=host). to run a container without user namespace add parameter *--userns=host* to *docker run* command
 
