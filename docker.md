@@ -10,7 +10,7 @@ DOCKER NOTES
 
 
 ## Environment
-in my pc ttpically i work in a virtual machine guest Centos/7.
+in my pc typically i work in a virtual machine guest Centos/7.
 Guest is configure with two virtual nics: 
 
 - a nat network to access to internet 
@@ -53,7 +53,7 @@ I've found some issues with usernamespace and selinux in docker 1.12 (for the mo
 
 - add usernamespace kernel parameter
 
- - edit file */etc/sysconfig/grub* and add *user_namespace.enable=1* into *GRUB_CMDLINE_LINUX* variabile 
+ - edit file */etc/default/grub* and add *user_namespace.enable=1* into *GRUB_CMDLINE_LINUX* variabile 
 
  - update grub boot configuration  `grub2-mkconfig -o /boot/grub2/grub.cfg`
 
