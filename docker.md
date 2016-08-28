@@ -11,11 +11,11 @@ DOCKER NOTES
 
 ## Environment
 in my pc typically i work in a virtual machine guest Centos/7.
-Guest is configure with two virtual nics: 
+Guest is configure with two virtual nics:
 
-- a nat network to access to internet 
+- a nat network to access to internet
 
-- an host only network to reach my pc. 
+- an host only network to reach my pc.
 
 It simplifies firewall rules (by making the hostonly interface as  trusted) and also allows to disconnect the virtual machine from internet by  putting down the first interface
 
@@ -46,24 +46,24 @@ logged as root
 
 ## Configure usenamespace
 
-Usernamespace allows to remap userid inside the container. It must be made before any other configuration because it changes the */var/lib/docker* to */var/lib/docker/1000000.1000000* 
+Usernamespace allows to remap userid inside the container. It must be made before any other configuration because it changes the */var/lib/docker* to */var/lib/docker/1000000.1000000*
 After this configuration real user id of container processes inside the host will be 1000000+(container user id)
 
 I've found some issues with usernamespace and selinux in docker 1.12 (for the moment i've disabled selinux wihtout analyzing in depth)
 
 - add usernamespace kernel parameter
 
- - edit file */etc/default/grub* and add *user_namespace.enable=1* into *GRUB_CMDLINE_LINUX* variabile 
+ - edit file */etc/default/grub* and add *user_namespace.enable=1* into *GRUB_CMDLINE_LINUX* variabile
 
  - update grub boot configuration  `grub2-mkconfig -o /boot/grub2/grub.cfg`
 
 - add *--userns-remap=default* parameter to docker start command in */etc/systemd/system/docker.service*
 
-- create file */etc/subuid* 
+- create file */etc/subuid*
 
 > dockremap:1000000:65536
 
-- create file */etc/subgid* 
+- create file */etc/subgid*
 
 > dockremap:1000000:65536
 
@@ -72,4 +72,3 @@ I've found some issues with usernamespace and selinux in docker 1.12 (for the mo
 ### Run a container witout usernamespace
 
 For some container could be necessary to disable user namespace (in case ho nfs mount or net=host). to run a container without user namespace add parameter *--userns=host* to *docker run* command
-

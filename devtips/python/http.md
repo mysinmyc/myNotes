@@ -1,27 +1,7 @@
-Simple HTTP servers and clients
-===============================
+PYTHON HTTP
+===========
 
 
-# Test
-
-## CURL TO POST A JSON
-
-````
-curl -d @-  -H "Content-Type: application/json" -X POST  http://127.0.0.1:5000/paperino <<EOF
-{
-"scrivo":"CIAO"
-}
-EOF
-````
-
-
-
-## HTTPIE TO POST A JSON
-
-`http --json post  http://127.0.0.1:5000/paperino scrivo=ciao`
-
-
-# Python
 
 ## Base HTTPServer
 
@@ -45,7 +25,7 @@ if __name__ == "__main__":
 
 
 
-## Flask http server 
+## Flask http server
 
 very simple to make rest api!!! it's BSD lincensed
 
@@ -78,4 +58,3 @@ if __name__ == "__main__":
 ## request http client
 
 It's optional (in ubuntu `apt-get install python-requests`)
-
