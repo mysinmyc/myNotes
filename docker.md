@@ -72,3 +72,34 @@ I've found some issues with usernamespace and selinux in docker 1.12 (for the mo
 ### Run a container witout usernamespace
 
 For some container could be necessary to disable user namespace (in case ho nfs mount or net=host). to run a container without user namespace add parameter *--userns=host* to *docker run* command
+
+
+
+### Run unsecure registry
+
+```
+docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  -v /var/lib/registry:/var/lib/registry \
+  registry:2
+```
+
+
+### Run secure registry
+
+it need tls key under *$PWD/certs/domain.crt* and certificate under *$PWD/certs/domain.key*
+
+```
+docker run -d \
+  --restart=always \
+  --name registry \
+  -v "$(pwd)"/certs:/certs \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+  -v /var/lib/registry:/var/lib/registry \
+  -p 443:443 \
+  registry:2
+```
